@@ -50,7 +50,7 @@ void handler(int signo)
 int main(void) 
 {
 	// create fifo for write
-	if(mkfifo("new_number", 0666) == -1) 
+	if(mkfifo("/tmp/new_number", 0666) == -1) 
 	{
 		if (errno != EEXIST) 
 		{
@@ -59,7 +59,7 @@ int main(void)
 		}
 	}
 
-	if(mkfifo("terminated", 0666) == -1) 
+	if(mkfifo("/tmp/terminated", 0666) == -1) 
 	{
 		if (errno != EEXIST) 
 		{
@@ -93,14 +93,14 @@ int main(void)
 
 		printf("Opening FIFO, waiting for slave to be ready...\n");
 
-		int fd = open("new_number", O_WRONLY);
+		int fd = open("/tmp/new_number", O_WRONLY);
 		if(fd == -1) 
 		{
 			perror("Error opening named pipe");
 			exit (1);
 		}
 
-		int fd_terminated = open("terminated", O_WRONLY);
+		int fd_terminated = open("/tmp/terminated", O_WRONLY);
 		if(fd_terminated == -1) 
 		{
 			perror("Error opening named pipe");

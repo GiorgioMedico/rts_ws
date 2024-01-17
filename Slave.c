@@ -67,7 +67,7 @@ void *writer(void *arg)
 
 void *read_from_fifo(void *arg) 
 {
-	int fd_terminated = open("terminated", O_RDONLY);	
+	int fd_terminated = open("/tmp/terminated", O_RDONLY);	
 	if(fd_terminated == -1) 
 	{
 		perror("Error opening named pipe");
@@ -109,7 +109,7 @@ int main(void)
 	// set up communication with master
 	printf("Waiting for master to be ready...\n");
 
-	int fd = open("new_number", O_RDONLY);	
+	int fd = open("/tmp/new_number", O_RDONLY);	
 	if(fd == -1) 
 	{
 		perror("Error opening named pipe");
